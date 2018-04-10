@@ -22,7 +22,7 @@ node {
             // TIP: To find the ACS DNS, open the Deployments section for your ACS in Azure portal, then look at the Output section
             // TIP: To find the username for your ACS, look at the Input section for your Deployment and look for LINUXADMINUSERNAME
             def acsMasterDNS = 'myapp-staging-master.centralus.cloudapp.azure.com'
-            def acsUsername = 'docker'
+            def acsUsername = 'swarmuser'
             
 
             // First stage - pull the 'develop' branch from BitBucket
