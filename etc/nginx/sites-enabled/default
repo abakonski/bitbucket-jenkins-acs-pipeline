@@ -1,0 +1,24 @@
+server {
+    listen 80;
+    server_name _;
+    # Ideally, we would use full server name instead of wildcard "_", e.g.:
+    # server_name myjenkinsserver.centralus.cloudapp.azure.com;
+
+    error_page 403 /jenkins-on-azure;
+
+    add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+    add_header X-Content-Type-Options nosniff;
+
+    location /bitbucket-hook/ {
+        proxy_set_header        Host $host:$server_port;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+
+        proxy_pass              http://localhost:8080/bitbucket-hook/;
+    }
+
+    location / {
+        deny all;
+    }
+}
